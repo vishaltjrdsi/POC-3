@@ -8,7 +8,7 @@ const ProtectedRoute = ({ children }) => {
     if (!authState) return;
 
     if (!authState.isAuthenticated) {
-      oktaAuth.signInWithRedirect(); // 🔥 triggers login
+      oktaAuth.signInWithRedirect(); 
     }
   }, [authState]);
 
