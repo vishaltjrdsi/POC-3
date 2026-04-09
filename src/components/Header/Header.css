@@ -1,0 +1,47 @@
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  background-color: #1f2937;
+  color: #f9fafb;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.user-role {
+  font-size: 0.9rem;
+  font-weight: normal;
+  color: #9ca3af; /* light gray for role */
+  margin-left: 8px;
+}
+
+.auth-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-name {
+  font-weight: 500;
+  color: #f3f4f6;
+}
+
+.auth-actions button,
+.auth-actions .logout-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.auth-actions .logout-button {
+  background-color: #ef4444;
+  color: #fff;
+}
+
+.auth-actions .logout-button:hover {
+  background-color: #b91c1c;
+}

@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { AppRoutes } from "./routes";
 import GlobalAlert from "../components/GlobalAlert";
 import { useNavigate } from "react-router-dom";
-import Header from "../components/Header";
+import Header from "../components/Header/Header";
 import { useEffect } from "react";
 import { login } from "../store/authSlice";
 

@@ -4,7 +4,6 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import { useSelector } from "react-redux";
 import { ModuleRegistry, ClientSideRowModelModule } from "ag-grid-community";
-import ActionsCell from "../components/ActionsCell";
 
 // Register AG Grid modules
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
@@ -12,12 +11,14 @@ ModuleRegistry.registerModules([ClientSideRowModelModule]);
 const Dashboard = () => {
   const user = useSelector((state) => state.auth.user);
   const userRole = user?.role;
-  console.log("User Role:", userRole);
 
-  const defaultColDef = useMemo(() => ({
-  resizable: true,
-  suppressSizeToFit: true,  // Prevents auto-fit interference
-}), []);
+  const defaultColDef = useMemo(
+    () => ({
+      resizable: true,
+      suppressSizeToFit: true,
+    }),
+    []
+  );
 
   const rowData = useMemo(
     () => [
@@ -29,44 +30,45 @@ const Dashboard = () => {
   );
 
   const columnDefs = useMemo(
-  () => [
-     { field: "id", headerName: "ID", flex: 1, minWidth: 70 },
-    { field: "name", headerName: "Name", flex: 1 },
-    { field: "email", headerName: "Email", flex: 1 },
-    {
-      
-  headerName: "Actions",
-  field: "actions",
-   flex: 1,
-      minWidth: 150, 
-  cellRenderer: (params) => (
-    <div>
-      <button
-        disabled={userRole !== 'admin'}
-        onClick={() => console.log('Edit', params.data.id)}
-        style={{
-          opacity: userRole !== 'admin' ? 0.5 : 1,
-          cursor: userRole !== 'admin' ? 'not-allowed' : 'pointer'
-        }}
-      >
-        Edit
-      </button>
-    </div>
-  ),
-  width: 200,
-    },
-  ],
-  [userRole] // Re-creates columns when role changes
-);
-
+    () => [
+      { field: "id", headerName: "ID", flex: 1, minWidth: 70 },
+      { field: "name", headerName: "Name", flex: 1 },
+      { field: "email", headerName: "Email", flex: 1 },
+      {
+        headerName: "Actions",
+        field: "actions",
+        flex: 1,
+        minWidth: 150,
+        cellRenderer: (params) => (
+          <div>
+            <button
+              disabled={userRole !== "admin"}
+              onClick={() => {
+                if (userRole === "admin") {
+                  alert(`Hello Admin! Editing user ID: ${params.data.id}`);
+                }
+              }}
+              style={{
+                opacity: userRole !== "admin" ? 0.5 : 1,
+                cursor: userRole !== "admin" ? "not-allowed" : "pointer",
+              }}
+            >
+              Edit
+            </button>
+          </div>
+        ),
+        width: 200,
+      },
+    ],
+    [userRole]
+  );
 
   return (
     <div className="ag-theme-alpine" style={{ height: 400, width: "100%" }}>
       <AgGridReact
-        theme="legacy"
         rowData={rowData}
         columnDefs={columnDefs}
-  defaultColDef={defaultColDef}
+        defaultColDef={defaultColDef}
       />
     </div>
   );
