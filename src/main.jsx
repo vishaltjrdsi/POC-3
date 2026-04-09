@@ -1,10 +1,46 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./app/App.jsx";
+import { AlertProvider } from "./context/AlertContext";
+import GlobalAlert from "./components/GlobalAlert";
+import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import { store } from "./store/store"; 
+import { Security } from "@okta/okta-react";
+import { oktaConfig } from "./auth/oktaConfig";
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+// ReactDOM.createRoot(document.getElementById("root")).render(
+//   <React.StrictMode>
+//     <BrowserRouter>
+//       <Provider store={store}>
+//         <AlertProvider>
+//           <GlobalAlert />
+//           <App />
+//         </AlertProvider>
+//       </Provider>
+//     </BrowserRouter>
+//   </React.StrictMode>
+// );
+
+const restoreOriginalUri = async (_oktaAuth, originalUri) => {
+  window.location.replace(originalUri || "/");
+};
+
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <Provider store={store}>
+        <AlertProvider>
+          <Security
+            oktaAuth={oktaConfig}
+            restoreOriginalUri={restoreOriginalUri}
+          >
+            <GlobalAlert />
+            <App />
+          </Security>
+        </AlertProvider>
+      </Provider>
+    </BrowserRouter>
+  </React.StrictMode>
+);
