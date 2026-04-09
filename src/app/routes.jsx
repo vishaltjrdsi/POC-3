@@ -6,7 +6,6 @@ import ProtectedRoute from "../components/ProtectedRoute";
 export const AppRoutes = () => {
   return (
     <Routes>
-      {/* ✅ Use Okta callback */}
       <Route path="/login/callback" element={<LoginCallback />} />
 
       <Route

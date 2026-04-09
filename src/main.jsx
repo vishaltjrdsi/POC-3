@@ -9,18 +9,6 @@ import { store } from "./store/store";
 import { Security } from "@okta/okta-react";
 import { oktaConfig } from "./auth/oktaConfig";
 
-// ReactDOM.createRoot(document.getElementById("root")).render(
-//   <React.StrictMode>
-//     <BrowserRouter>
-//       <Provider store={store}>
-//         <AlertProvider>
-//           <GlobalAlert />
-//           <App />
-//         </AlertProvider>
-//       </Provider>
-//     </BrowserRouter>
-//   </React.StrictMode>
-// );
 
 const restoreOriginalUri = async (_oktaAuth, originalUri) => {
   window.location.replace(originalUri || "/");

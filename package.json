@@ -13,6 +13,8 @@
     "@okta/okta-auth-js": "^8.0.0",
     "@okta/okta-react": "^6.11.0",
     "@reduxjs/toolkit": "^2.11.2",
+    "ag-grid-community": "^35.2.1",
+    "ag-grid-react": "^35.2.1",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-redux": "^9.2.0"
