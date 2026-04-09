@@ -1,0 +1,33 @@
+.global-alert {
+  position: fixed;
+  top: 12px;           /* distance from top */
+  left: 50%;           /* center horizontally */
+  transform: translateX(-50%); /* adjust to center */
+
+  padding: 15px 25px;
+  border-radius: 8px;
+  color: white;
+  font-weight: 500;
+  font-size: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 9999;
+
+  animation: slideDown 0.3s ease-out, fadeOut 0.3s ease-in 2.7s forwards;
+}
+
+/* Alert types */
+.alert-success { background-color: #4caf50; }
+.alert-error { background-color: #f44336; }
+.alert-warning { background-color: #ff9800; }
+
+/* Slide from slightly above top */
+@keyframes slideDown {
+  from { transform: translateX(-50%) translateY(-20px); opacity: 0; }
+  to   { transform: translateX(-50%) translateY(0); opacity: 1; }
+}
+
+/* Fade out after 3s */
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}

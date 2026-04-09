@@ -1,28 +1,26 @@
-import { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useRef } from "react";
 
-const AlertContext = createContext();
+export const AlertContext = createContext();
 
 export const AlertProvider = ({ children }) => {
-  const [alert, setAlert] = useState({
-    message: "",
-    type: "success",
-    visible: false,
-  });
+  const [alert, setAlert] = useState({ type: "", message: "" });
+  const timeoutRef = useRef(null); // keep track of timeout
 
-  const showAlert = (message, type) => {
-    setAlert({ message, type, visible: true });
+  const showAlert = (type, message) => {
+    // Clear previous timer if exists
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
 
-    setTimeout(() => {
-      setAlert((prev) => ({ ...prev, visible: false }));
+    setAlert({ type, message });
+
+    // Auto-hide after 3 seconds
+    timeoutRef.current = setTimeout(() => {
+      setAlert({ type: "", message: "" });
+      timeoutRef.current = null;
     }, 3000);
   };
 
-  const hideAlert = () => {
-    setAlert((prev) => ({ ...prev, visible: false }));
-  };
-
   return (
-    <AlertContext.Provider value={{ alert, showAlert, hideAlert }}>
+    <AlertContext.Provider value={{ alert, showAlert }}>
       {children}
     </AlertContext.Provider>
   );
